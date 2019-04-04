@@ -8,6 +8,7 @@
     "dotenv": "7.0.0",
     "dotenv-expand": "5.1.0",
     "fs-extra": "7.0.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-app-polyfill": "^0.2.2",
     "react-dom": "^16.8.6",
@@ -23,6 +24,7 @@
     "babel-plugin-named-asset-import": "^0.3.1",
     "babel-preset-react-app": "^7.0.2",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
+    "check-prop-types": "^1.1.2",
     "css-loader": "2.1.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
@@ -63,7 +65,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js  --coverage"
+    "test": "node scripts/test.js"
   },
   "eslintConfig": {
     "extends": "react-app"
