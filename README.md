@@ -1,68 +1,93 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Dependencies
 
-## Available Scripts
+```js
+yarn add ajv
+yarn add -D enzyme enzyme-adapter-react-16 jest jest-enzyme 
+```
 
-In the project directory, you can run:
 
-### `npm start`
+## globally config enzyme
+src/setupTest.js
+```js
+import { configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+configure({ adapter: new Adapter() })
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+```
+and use this path for `setupFilesAfterEnv` item in jest config file(see below)
 
-### `npm test`
+## jest config file
+```js
+module.exports = {
+  setupFilesAfterEnv: ['<rootDir>src/setupTests.js'],
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts'],
+  resolver: 'jest-pnp-resolver',
+  setupFiles: ['react-app-polyfill/jsdom'],
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+  testPathIgnorePatterns: ['/node_modules/', '/scripts/'],
+  testEnvironment: 'jsdom',
+  testURL: 'http://localhost',
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
+    '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
+    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)':
+      '<rootDir>/config/jest/fileTransform.js'
+  },
+  transformIgnorePatterns: [
+    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$',
+    '^.+\\.module\\.(css|sass|scss)$'
+  ],
+  moduleNameMapper: {
+    '^react-native$': 'react-native-web',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/__mocks__/fileMock.js',
+    '^.+\\.module\\.(css|sass|scss|less)$': 'identity-obj-proxy'
+  },
+  moduleFileExtensions: [
+    'web.js',
+    'js',
+    'web.ts',
+    'ts',
+    'web.tsx',
+    'tsx',
+    'json',
+    'web.jsx',
+    'jsx',
+    'node'
+  ],
+  watchPlugins: [
+    '<rootDir>/node_modules/jest-watch-typeahead/filename.js',
+    '<rootDir>/node_modules/jest-watch-typeahead/testname.js'
+  ]
+}
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
 
-### `npm run build`
+## setup mock globally
+__mocks__/fileMock.js
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```js
+module.exports = 'test-file-stub'
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## tdd: first test: App.test.js
+```js
+import React from 'react'
+import { shallow } from 'enzyme'
+import App from './App'
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+test('renders without error', () => {
+  const wrapper = shallow(<App />)
+  const appComponent =  wrapper.find("[data-test='component-app']")
+  expect(appComponent.length).toBe(1)
+})
 
-### `npm run eject`
+test('renders increment button', () => {})
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+test('renders counter display', () => {})
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+test('counter start at 0', () => {})
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+test('clicking button increments counter display', () => {})
+```
