@@ -1,0 +1,13 @@
+body{
+    display: flex;
+    justify-content: center;
+    
+    div .guessedWords {
+        span {
+          display: table-cell;
+          width: 10vw;
+          padding-left: 1em;
+          border: 1px solid #e8e8e8;
+        }
+      }
+}

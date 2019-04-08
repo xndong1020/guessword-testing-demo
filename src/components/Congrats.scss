@@ -1,0 +1,13 @@
+body {
+  div .congrats {
+    background-color: aquamarine;
+    height: 3vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .congrats-message {
+      margin: 0 auto;
+    }
+  }
+}
