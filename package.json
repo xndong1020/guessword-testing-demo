@@ -12,6 +12,8 @@
     "react": "^16.8.6",
     "react-app-polyfill": "^0.2.2",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.0.1",
+    "redux": "^4.0.1",
     "resolve": "1.10.0"
   },
   "devDependencies": {
@@ -27,11 +29,11 @@
     "check-prop-types": "^1.1.2",
     "css-loader": "2.1.1",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.11.2",
+    "enzyme-adapter-react-16": "^1.12.1",
     "eslint": "5.16.0",
     "eslint-config-react-app": "^3.0.8",
     "eslint-loader": "2.1.2",
-    "eslint-plugin-flowtype": "3.5.1",
+    "eslint-plugin-flowtype": "3.6.0",
     "eslint-plugin-import": "2.16.0",
     "eslint-plugin-jsx-a11y": "6.2.1",
     "eslint-plugin-react": "7.12.4",
@@ -58,7 +60,7 @@
     "terser-webpack-plugin": "1.2.3",
     "url-loader": "1.1.2",
     "webpack": "4.29.6",
-    "webpack-dev-server": "3.2.1",
+    "webpack-dev-server": "3.3.0",
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "4.2.0"
   },
